@@ -1,10 +1,9 @@
-version: 2.1
+version: 2
 
 jobs:
   test:
     docker:
       - image: cimg/base:2024.01
-    working_directory: ~/project
     steps:
       - checkout
       - run:
@@ -14,7 +13,6 @@ jobs:
   build:
     docker:
       - image: cimg/base:2024.01
-    working_directory: ~/project
     steps:
       - checkout
       - run: whoami
@@ -26,14 +24,9 @@ workflows:
   test-workflow:
     jobs:
       - test
-  schedule-workflow:
-    triggers:
-      - schedule:
-          cron: "15 16 * * *"
-          filters:
-            branches:
-              only:
-                - master
-    jobs:
-      - test
-      - build
+      - build:
+          requires:
+            - test
+
+
+
