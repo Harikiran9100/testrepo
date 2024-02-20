@@ -4,10 +4,10 @@ workflows:
   # test-deploy:
   #   jobs:
   #     - test
-  schedule-deploy:
+  test-deploy:
     triggers:
       - schedule:
-          cron: "14 15 * * *"
+          cron: "15 15 * * *"
           filters:
             branches:
               only:
