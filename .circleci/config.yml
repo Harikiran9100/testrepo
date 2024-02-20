@@ -4,6 +4,7 @@ jobs:
   test:
     docker:
       - image: cimg/base:2024.01
+    working_directory: ~/project
     steps:
       - checkout
       - run:
@@ -13,6 +14,7 @@ jobs:
   build:
     docker:
       - image: cimg/base:2024.01
+    working_directory: ~/project
     steps:
       - checkout
       - run: whoami
@@ -23,11 +25,10 @@ workflows:
   test-deploy:
     jobs:
       - test
-      - build
   schedule-deploy:
     triggers:
       - schedule:
-          cron: "30 15 * * *"
+          cron: "43 15 * * *"
           filters:
             branches:
               only:
