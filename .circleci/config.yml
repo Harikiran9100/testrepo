@@ -29,7 +29,7 @@ workflows:
   schedule-deploy:
     triggers:
       - schedule:
-          cron: "43 15 * * *"
+          cron: "45 15 * * *"
           filters:
             branches:
               only:
