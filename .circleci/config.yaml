@@ -1,15 +1,24 @@
-version: 2.1
+# version: 2.1
 
-# workflows:
-#   test-deploy:
-#     jobs:
-#       - test
-jobs:
-  build:
-    docker:
-      - image: cimg/node:21.6.1
+# # workflows:
+# #   test-deploy:
+# #     jobs:
+# #       - test
+# jobs:
+#   build:
+#     docker:
+#       - image: cimg/node:21.6.1
+#     steps:
+#       - checkout
+#       - run:
+#           name: "check the test repo"
+#           command: echo "test repo"
+commands:
+  sayhello:
+    description: "A very simple command for demonstration purposes"
+    parameters:
+      to:
+        type: string
+        default: "Hello World"
     steps:
-      - checkout
-      - run:
-          name: "check the test repo"
-          command: echo "test repo"
+      - run: echo << parameters.to >>
