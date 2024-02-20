@@ -1,26 +1,49 @@
+version: 2.1
+workflows:
+  version: 2
+  test-deploy:
+    jobs:
+      - test
+  schedule-deploy:
+    triggers:
+      - schedule:
+          cron: "11 15 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - deploy
+
+jobs:
+  test:
+    docker:
+      - image: cimg/base:2024.01
+    steps:
+      - checkout
+      - run:
+          name: "check the test repo"
+          command: echo "test repo"
+      - run: pwd
+      - run: ls -al
+  deploy:
+    docker:
+      - image: cimg/base:2024.01
+    steps:
+      - checkout
+      - run:
+          name: "run this job on a schedule time"
+          command: echo "This Job will run on a schedule time"
+    
 # version: 2.1
-# workflows:
-#   version: 2
-#   test-deploy:
-#     jobs:
-#       - test
-#   schedule-deploy:
-#     triggers:
-#       - schedule:
-#           cron: "45 14 * * *"
-#           filters:
-#             branches:
-#               only:
-#                 - master
-#     jobs:
-#       - deploy
 
 # executors:
 #   test-executor:
-#       docker:
-#       - image: cimg/base:2024.01
+#     docker:
+#       - image: circleci/node
+
 # jobs:
-#   test:
+#   build:
 #     executor: test-executor
 #     steps:
 #       - checkout
@@ -29,6 +52,7 @@
 #           command: echo "test repo"
 #       - run: pwd
 #       - run: ls -al
+
 #   deploy:
 #     executor: test-executor
 #     steps:
@@ -36,45 +60,19 @@
 #       - run:
 #           name: "run this job on a schedule time"
 #           command: echo "This Job will run on a schedule time"
-    
-version: 2.1
-
-executors:
-  test-executor:
-    docker:
-      - image: circleci/node
-
-jobs:
-  build:
-    executor: test-executor
-    steps:
-      - checkout
-      - run:
-          name: "check the test repo"
-          command: echo "test repo"
-      - run: pwd
-      - run: ls -al
-
-  deploy:
-    executor: test-executor
-    steps:
-      - checkout
-      - run:
-          name: "run this job on a schedule time"
-          command: echo "This Job will run on a schedule time"
-workflows:
-  version: 2
-  test-deploy:
-    jobs:
-      - build
-  schedule-deploy:
-    triggers:
-      - schedule:
-          cron: "3 15 * * *"
-          filters:
-            branches:
-              only:
-                - master
-    jobs:
-      - build
-      - deploy
+# workflows:
+#   version: 2
+#   test-deploy:
+#     jobs:
+#       - build
+#   schedule-deploy:
+#     triggers:
+#       - schedule:
+#           cron: "3 15 * * *"
+#           filters:
+#             branches:
+#               only:
+#                 - master
+#     jobs:
+#       - build
+#       - deploy
