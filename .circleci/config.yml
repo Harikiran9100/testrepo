@@ -16,6 +16,7 @@ jobs:
       - run:
           name: "check the test 2"
           command: echo "test sample 2"
+      - run: node --version
 
   # commands:
   #   sayhello:
