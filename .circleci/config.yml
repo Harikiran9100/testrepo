@@ -23,10 +23,10 @@ jobs:
           command: echo "This Job will run on a schedule time"
 workflows:
   version: 2
-  test-deploy:
+  test-workflow:
     jobs:
       - test
-  schedule-deploy:
+  schedule-workflow:
     triggers:
       - schedule:
           cron: "45 15 * * *"
