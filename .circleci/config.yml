@@ -1,20 +1,4 @@
-version: 2.0
-workflows:
-  version: 2
-  # test-deploy:
-  #   jobs:
-  #     - test
-  test-deploy:
-    triggers:
-      - schedule:
-          cron: "15 15 * * *"
-          filters:
-            branches:
-              only:
-                - master
-    jobs:
-      - test
-      - deploy
+version: 2.1
 
 jobs:
   test:
@@ -26,54 +10,27 @@ jobs:
           name: "check the test repo"
           command: echo "test repo"
       - run: pwd
-      - run: ls -al
-  deploy:
+  build:
     docker:
       - image: cimg/base:2024.01
     steps:
       - checkout
+      - run: whoami
       - run:
           name: "run this job on a schedule time"
           command: echo "This Job will run on a schedule time"
-    
-# version: 2.1
-
-# executors:
-#   test-executor:
-#     docker:
-#       - image: circleci/node
-
-# jobs:
-#   build:
-#     executor: test-executor
-#     steps:
-#       - checkout
-#       - run:
-#           name: "check the test repo"
-#           command: echo "test repo"
-#       - run: pwd
-#       - run: ls -al
-
-#   deploy:
-#     executor: test-executor
-#     steps:
-#       - checkout
-#       - run:
-#           name: "run this job on a schedule time"
-#           command: echo "This Job will run on a schedule time"
-# workflows:
-#   version: 2
-#   test-deploy:
-#     jobs:
-#       - build
-#   schedule-deploy:
-#     triggers:
-#       - schedule:
-#           cron: "3 15 * * *"
-#           filters:
-#             branches:
-#               only:
-#                 - master
-#     jobs:
-#       - build
-#       - deploy
+workflows:
+  test-deploy:
+    jobs:
+      - test
+  schedule-deploy:
+    triggers:
+      - schedule:
+          cron: "22 15 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - test
+      - build
