@@ -20,6 +20,12 @@ jobs:
           name: "run this job on a schedule time"
           command: echo "This Job will run on a schedule time"
       - run: pwd
+  deploy:
+    docker:
+      - image: cimg/base:2024.01
+    steps:
+      - checkout
+      - run: lscpu
 workflows:
   version: 2
   test-workflow:
@@ -28,6 +34,7 @@ workflows:
       - build:
           requires:
             - test
+      - deploy
 
 
 
