@@ -12,4 +12,4 @@ jobs:
       - checkout
       - run:
           name: "check the test repo"
-          command: node --version
+          command: echo "test repo"
