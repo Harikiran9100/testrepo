@@ -42,7 +42,7 @@ version: 2.1
 executors:
   test-executor:
     docker:
-      - image: cimg/base:2024.01
+      - image: circleci/node
 
 jobs:
   test:
@@ -70,7 +70,7 @@ workflows:
   schedule-deploy:
     triggers:
       - schedule:
-          cron: "52 14 * * *"
+          cron: "57 14 * * *"
           filters:
             branches:
               only:
