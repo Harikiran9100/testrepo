@@ -16,3 +16,10 @@ jobs:
       - run:
           name: "check the test repo"
           command: echo "test repo"
+  build:
+    executor: test-executor
+    steps:
+      - checkout
+      - run:
+          name: "check teh test repo2 "
+          command: echo "test repo is working"
