@@ -1,12 +1,13 @@
 version: 2.1
 workflows:
+  version: 2
   test-deploy:
     jobs:
       - test
   schedule-deploy:
     triggers:
       - schedule:
-          cron: "37 2 * * *"
+          cron: "45 14 * * *"
           filters:
             branches:
               only:
