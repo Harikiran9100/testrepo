@@ -3,6 +3,11 @@ workflows:
   test-deploy:
     jobs:
       - test
+commands:
+  greet:
+    description: "Hello sample command"
+    steps:
+      - run: echo "Hello sample command"
 executors:
   test-executor:
       docker:
