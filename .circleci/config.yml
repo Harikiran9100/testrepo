@@ -19,6 +19,7 @@ jobs:
       - run:
           name: "run this job on a schedule time"
           command: echo "This Job will run on a schedule time"
+      - run: pwd
 workflows:
   version: 2
   test-workflow:
