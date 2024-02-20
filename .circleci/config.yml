@@ -1,10 +1,8 @@
 version: 2.1
-
 workflows:
   test-deploy:
     jobs:
       - test
-      - build
 executors:
   test-executor:
       docker:
@@ -17,10 +15,12 @@ jobs:
       - run:
           name: "check the test repo"
           command: echo "test repo"
-  build:
-    executor: test-executor
-    steps:
-      - checkout
-      - run:
-          name: "check teh test repo2 "
-          command: echo "test repo is working"
+      - run: pwd
+      - run: ls -al
+  # build:
+  #   executor: test-executor
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: "check teh test repo2 "
+  #         command: echo "test repo is working"
