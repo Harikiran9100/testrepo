@@ -22,6 +22,7 @@ jobs:
           name: "run this job on a schedule time"
           command: echo "This Job will run on a schedule time"
 workflows:
+  version: 2
   test-deploy:
     jobs:
       - test
