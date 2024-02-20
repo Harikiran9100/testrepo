@@ -38,21 +38,6 @@
 #           command: echo "This Job will run on a schedule time"
     
 version: 2.1
-workflows:
-  version: 2
-  test-deploy:
-    jobs:
-      - test
-  schedule-deploy:
-    triggers:
-      - schedule:
-          cron: "50 14 * * *"
-          filters:
-            branches:
-              only:
-                - master
-    jobs:
-      - deploy
 
 executors:
   test-executor:
@@ -77,3 +62,18 @@ jobs:
       - run:
           name: "run this job on a schedule time"
           command: echo "This Job will run on a schedule time"
+workflows:
+  version: 2
+  test-deploy:
+    jobs:
+      - test
+  schedule-deploy:
+    triggers:
+      - schedule:
+          cron: "52 14 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - deploy
