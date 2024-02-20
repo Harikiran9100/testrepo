@@ -1,3 +1,42 @@
+# version: 2.1
+# workflows:
+#   version: 2
+#   test-deploy:
+#     jobs:
+#       - test
+#   schedule-deploy:
+#     triggers:
+#       - schedule:
+#           cron: "45 14 * * *"
+#           filters:
+#             branches:
+#               only:
+#                 - master
+#     jobs:
+#       - deploy
+
+# executors:
+#   test-executor:
+#       docker:
+#       - image: cimg/base:2024.01
+# jobs:
+#   test:
+#     executor: test-executor
+#     steps:
+#       - checkout
+#       - run:
+#           name: "check the test repo"
+#           command: echo "test repo"
+#       - run: pwd
+#       - run: ls -al
+#   deploy:
+#     executor: test-executor
+#     steps:
+#       - checkout
+#       - run:
+#           name: "run this job on a schedule time"
+#           command: echo "This Job will run on a schedule time"
+    
 version: 2.1
 workflows:
   version: 2
@@ -7,7 +46,7 @@ workflows:
   schedule-deploy:
     triggers:
       - schedule:
-          cron: "45 14 * * *"
+          cron: "50 14 * * *"
           filters:
             branches:
               only:
@@ -17,8 +56,9 @@ workflows:
 
 executors:
   test-executor:
-      docker:
+    docker:
       - image: cimg/base:2024.01
+
 jobs:
   test:
     executor: test-executor
@@ -29,6 +69,7 @@ jobs:
           command: echo "test repo"
       - run: pwd
       - run: ls -al
+
   deploy:
     executor: test-executor
     steps:
@@ -36,4 +77,3 @@ jobs:
       - run:
           name: "run this job on a schedule time"
           command: echo "This Job will run on a schedule time"
-    
