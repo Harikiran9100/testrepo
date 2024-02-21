@@ -1,10 +1,5 @@
 version: 2
 
-executors:
-  docker-executor:
-    docker:
-      - image: cimg/base:2024.01
-
 jobs:
   build:
     machine:
@@ -25,7 +20,8 @@ jobs:
       - run: pwd
 
   build2:
-    executor: docker-executor
+    docker:
+      - image: cimg/base:2024.01
     steps:
       - checkout
       - run: whoami
@@ -34,7 +30,8 @@ jobs:
           command: echo "This Job will run on a schedule time"
 
   deploy:
-    executor: docker-executor
+    docker:
+      - image: cimg/base:2024.01
     steps:
       - checkout
       - run: lscpu
