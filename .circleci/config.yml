@@ -15,7 +15,8 @@ jobs:
       - run: lscpu
 
   test:
-    executor: docker-executor
+    docker:
+      - image: cimg/base:2024.01
     steps:
       - checkout
       - run:
