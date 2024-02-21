@@ -1,0 +1,29 @@
+version: 2
+
+jobs:
+  test:
+    docker:
+      - image: cimg/base:2024.01
+    steps:
+      - checkout
+      - run:
+          name: "check the test repo"
+          command: echo "test repo"
+      - run: pwd
+  build:
+    docker:
+      - image: cimg/base:2024.01
+    steps:
+      - checkout
+      - run: whoami
+      - run:
+          name: "run this job on a schedule time"
+          command: echo "This Job will run on a schedule time"
+workflows:
+  version: 2
+  test-workflow:
+    jobs:
+      - test
+      - build:
+          requires:
+            - test
