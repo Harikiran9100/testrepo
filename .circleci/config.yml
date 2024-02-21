@@ -1,5 +1,10 @@
 version: 2
 
+executors:
+  docker-executor:
+    docker:
+      - image: cimg/base:2024.01
+  
 jobs:
   build:
     machine: 
@@ -9,8 +14,7 @@ jobs:
       - checkout
       - run: lscpu
   test:
-    docker:
-      - image: cimg/base:2024.01
+    executor: docker-executor
     steps:
       - checkout
       - run:
@@ -18,25 +22,29 @@ jobs:
           command: echo "test repo"
       - run: pwd
 
-  # build:
-  #   docker:
-  #     - image: cimg/base:2024.01
-  #   steps:
-  #     - checkout
-  #     - run: whoami
-  #     - run:
-  #         name: "run this job on a schedule time"
-  #         command: echo "This Job will run on a schedule time"
-  # deploy:
-  #   docker:
-  #     - image: cimg/base:2024.01
-  #   steps:
-  #     - checkout
-  #     - run: lscpu
+  build2:
+    executor: docker-executor
+    steps:
+      - checkout
+      - run: whoami
+      - run:
+          name: "run this job on a schedule time"
+          command: echo "This Job will run on a schedule time"
+  deploy:
+    executor: docker-executor
+    steps:
+      - checkout
+      - run: lscpu
 
 workflows:
   version: 2
   test-workflow:
     jobs:
-      - build
+      - build2:
+          requires:
+            - build
       - test
+      - deploy
+      - build
+     
+      
