@@ -4,15 +4,16 @@ executors:
   docker-executor:
     docker:
       - image: cimg/base:2024.01
-  
+
 jobs:
   build:
-    machine: 
+    machine:
       image: ubuntu-2004:2023.10.1
     resource_class: arm.medium
     steps:
       - checkout
       - run: lscpu
+
   test:
     executor: docker-executor
     steps:
@@ -30,6 +31,7 @@ jobs:
       - run:
           name: "run this job on a schedule time"
           command: echo "This Job will run on a schedule time"
+
   deploy:
     executor: docker-executor
     steps:
@@ -46,6 +48,3 @@ workflows:
             - build
       - test
       - deploy
-      
-     
-      
