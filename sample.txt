@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 access key- AKIA376MA7JRELMBYF3G
 secret acces key - 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
+=======
+
+>>>>>>> 2d9afd2e0a297c8982749338037b1acb7b273d88
